@@ -1,15 +1,16 @@
 package com.codingdojo.mvc.controllers;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -139,9 +140,9 @@ public class Users {
 	}
 	//find by search
 	@RequestMapping(value ="/search", method =RequestMethod.GET)
-	public String search(@RequestParam(value="ingredient") String ingredient, Model model) {
+	public String search(@RequestParam(value="ingredient") String ingredient, Model model) throws IOException {
 		model.addAttribute("ingredient", ingredient);
-		URL url = new URL("https://api.edamam.com/search?q="+ingredient+"&app_id=659e59e4&app_key=fa04c651c0c6cfe0d7ac0216c4742e2a&from=0&to=3&calories=591-722&health=alcohol-free")
+		URL url = new URL("https://api.edamam.com/search?q="+ingredient+"&app_id=659e59e4&app_key=fa04c651c0c6cfe0d7ac0216c4742e2a&from=0&to=3&calories=591-722&health=alcohol-free");
 		HttpURLConnection con = (HttpURLConnection) url.openConnection();
 		con.setRequestMethod("GET");
 		con.setRequestProperty("User-Agent", "Mozilla/5.0");
@@ -150,6 +151,8 @@ public class Users {
 			System.out.println("URL API responseCode != 200");
 		}
 		else {
+			Object res = con.getContent();
+			System.out.println(res);
 	        BufferedReader in = new BufferedReader(
 	                new InputStreamReader(con.getInputStream()));
 	        String inputLine;
@@ -158,16 +161,21 @@ public class Users {
 	        	response.append(inputLine);
 	        }
 	        in.close();
-	        //Read JSON response and print
-	        JSONObject myResponse = new JSONObject(response.toString());
-	        System.out.println("result after Reading JSON Response");
-	        System.out.println("hits- "+myResponse.getString("hits"));
+//	        //Read JSON response and print
+//	        JSONObject myResponse = new JSONObject(response.toString());
+//	        System.out.println("result after Reading JSON Response");
+//	        System.out.println("hits- "+myResponse.getString("hits"));
 		}
 //		return "redirect:https://api.edamam.com/search?q="+ingredient+"&app_id=659e59e4&app_key=fa04c651c0c6cfe0d7ac0216c4742e2a&from=0&to=3&calories=591-722&health=alcohol-free";
 		return "redirect:/recipes";
 	}
 	
-	//see the api AJAX search under src/main/java/com.codingdojo.mvc.controllers/UsersApi.java
+	@RequestMapping(value="/apisearch", method=RequestMethod.POST)
+	public String apisearch(@RequestParam(value="hits") ArrayList<Object> recipes) {
+		System.out.println(recipes);
+		return "apisearch success";
+	}
+	
 	
 	@RequestMapping("https://api.edamam.com/search?q={ingredient}&app_id=659e59e4&app_key=fa04c651c0c6cfe0d7ac0216c4742e2a&from=0&to=3&calories=591-722&health=alcohol-free")
 	public String searchByArtist(@PathVariable("ingredient") String ingredient, Model model) {

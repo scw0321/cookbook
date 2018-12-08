@@ -20,7 +20,7 @@
 <a href="/logout">Logout</a>
 	<h1>Welcome, <c:out value="${user.name}"/></h1>	
 	
-	<form class="search_form" action="/search" method="GET">
+	<form class="search_form" action="/apisearch" method="GET">
 	<label>Search recipes by ingredient(s):</label>       
         <input class="ingredient" type="text" name="ingredient">
 		<input type="submit" value="Find">
