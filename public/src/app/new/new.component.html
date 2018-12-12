@@ -1,0 +1,15 @@
+<h1>New Recipe</h1>
+
+<!-- <p><c:out value="${error}"/></p>  -->
+<form action="/recipes/new" method="post">
+        <label for="title">Title:</label>
+        <p> error="title"</p>
+        <input type="text" name="title">
+        <label for="ingredient">Ingredients: </label>
+        <p> Error="ingredient"</p>
+        <textarea type="text" name="ingredient"></textarea>
+        <label for="prep">Preparation: </label>
+        <p> Error ="prep"</p>
+        <textarea name="prep"></textarea>
+    <input type="submit" value="Submit"/>
+</form>    

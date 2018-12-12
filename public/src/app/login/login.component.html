@@ -1,0 +1,44 @@
+<div style="display:inline-block">
+
+  <h1>Register!</h1>
+      
+      <p>Error Message here "user.*"</p>
+      
+      <form method="POST" action="/registration" modelAttribute="user">
+      
+        <p>
+              <label>Name:</label>
+              <input name="name" type="name"/>
+          </p>
+          <p>
+              <label>Email:</label>
+              <input name="email" type="email"/>
+          </p>
+          <p>
+              <label>Password:</label>
+              <input name="password" type="password"/>
+          </p>
+          <p>
+              <label>Password Confirmation:</label>
+              <input name="password_confirm" type="password"/>
+          </p>
+          <input type="submit" value="Register!"/>
+      </form>
+  </div>
+  
+  <div style="display:inline-block">
+  
+      <h1>Login</h1>
+   <!--    <p><c:out value="${error}"/></p>  -->
+      <form method="POST" action="/login">           
+          <p>
+              <label for="email">Email</label>
+              <input type="text" id="email" name="email"/>
+          </p>
+          <p>
+              <label for="password">Password</label>
+              <input type="password" id="password" name="password"/>
+          </p>
+          <input type="submit" value="Login!"/>
+      </form>    
+  </div>

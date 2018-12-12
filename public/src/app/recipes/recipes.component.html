@@ -1,0 +1,62 @@
+<a href="/logout">Logout</a>
+	<h1>Welcome, "$user.name" </h1>	
+	
+	<form (submit)="OnSearch()">
+	<label>Search recipes by ingredient(s):</label>       
+        <input class="ingredient" type="text" name="searchIng" [(ngModel)]="searchIng">
+		<input type="submit" value="Find">
+</form>
+
+<div class="container">
+             Nested Component Below:
+  <table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Ingredient</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><a href="/recipes/recipe.id">recipe.title"</a></td>
+            
+            <td>recipe.ingredient</td>
+           
+            <td><form style= "display: inline-block" action="/recipes/recipe.id/edit" method="post">
+            	<input type="hidden" name="_method" value="put">
+    			<input type="submit" value="Edit">
+				</form>
+				<form style= "display: inline-block" action="/recipes/recipe.id/delete" method="post">
+    			<input type="hidden" name="_method" value="delete">
+    			<input type="submit" value="Delete">
+				</form></td>
+        </tr>
+      </tbody>
+  </table>
+  </div>
+<pre style="text-align:center"><b><a href="/recipes/new">Create your own recipe</a></b> || <b><a href="/search">Find recipe by ingredient(s)</a></b></pre>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Picture</th>
+            <th>Ingredient</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody *ngIf= "recipes">      
+        <tr *ngFor="let r of recipes">
+          <td>{{r.recipe.label}}</td>
+          <td><img src="{{r.recipe.image}}" alt="{{r.recipe.label}}"></td>
+          <td>
+            <ul *ngFor="let ing of r.recipe.ingredientLines">
+              <li>{{ing}}</li>
+            </ul>
+          </td>
+          <td><a href="{{r.url}}">source: {{r.source}}</a>
+          <td><a href="#"> Add to My Recipes</a></td>
+        </tr>
+    </tbody>
+  </table>
