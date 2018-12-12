@@ -1,9 +1,6 @@
 package com.codingdojo.mvc.controllers;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +16,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
 
+import com.codingdojo.mvc.apiResponse.Response;
 import com.codingdojo.mvc.models.Recipe;
 import com.codingdojo.mvc.models.User;
 import com.codingdojo.mvc.services.UserService;
@@ -142,32 +141,39 @@ public class Users {
 	@RequestMapping(value ="/search", method =RequestMethod.GET)
 	public String search(@RequestParam(value="ingredient") String ingredient, Model model) throws IOException {
 		model.addAttribute("ingredient", ingredient);
-		URL url = new URL("https://api.edamam.com/search?q="+ingredient+"&app_id=659e59e4&app_key=fa04c651c0c6cfe0d7ac0216c4742e2a&from=0&to=3&calories=591-722&health=alcohol-free");
-		HttpURLConnection con = (HttpURLConnection) url.openConnection();
-		con.setRequestMethod("GET");
-		con.setRequestProperty("User-Agent", "Mozilla/5.0");
-		int responseCode = con.getResponseCode();
-		if(responseCode != 200) {
-			System.out.println("URL API responseCode != 200");
-		}
-		else {
-			Object res = con.getContent();
-			System.out.println(res);
-	        BufferedReader in = new BufferedReader(
-	                new InputStreamReader(con.getInputStream()));
-	        String inputLine;
-	        StringBuffer response = new StringBuffer();
-	        while ((inputLine = in.readLine()) != null) {
-	        	response.append(inputLine);
-	        }
-	        in.close();
-//	        //Read JSON response and print
+//		URL url = new URL("https://api.edamam.com/search?q="+ingredient+"&app_id=659e59e4&app_key=fa04c651c0c6cfe0d7ac0216c4742e2a&from=0&to=3&calories=591-722&health=alcohol-free");
+//		String urlStr = "https://api.edamam.com/search?q="+ingredient+"&app_id=659e59e4&app_key=fa04c651c0c6cfe0d7ac0216c4742e2a&from=0&to=3&calories=591-722&health=alcohol-free";
+//		RestTemplate restTemplate = new RestTemplate();
+//		Response ingredientRecipes = restTemplate.getForObject(urlStr, Response.class);
+//		model.addAttribute("resp", ingredientRecipes);
+//		HttpURLConnection con = (HttpURLConnection) url.openConnection();
+//		con.setRequestMethod("GET");
+//		con.setRequestProperty("Content-Type", "application/json");
+//		con.setRequestProperty("User-Agent", "Mozilla/5.0");
+//		int responseCode = con.getResponseCode();
+//		if(responseCode != 200) {
+//			System.out.println("URL API responseCode != 200");
+//		}
+//		else {
+//			Object res = con.getContent();
+//			System.out.println(res);
+//	        BufferedReader in = new BufferedReader(
+//	                new InputStreamReader(con.getInputStream()));
+//	        String inputLine;
+//	        StringBuffer response = new StringBuffer();
+//	        while ((inputLine = in.readLine()) != null) {
+//	        	response.append(inputLine);
+//	        }
+//	        in.close();
+//	        System.out.println(response);
+//	        
+////	        //Read JSON response and print
 //	        JSONObject myResponse = new JSONObject(response.toString());
 //	        System.out.println("result after Reading JSON Response");
 //	        System.out.println("hits- "+myResponse.getString("hits"));
-		}
-//		return "redirect:https://api.edamam.com/search?q="+ingredient+"&app_id=659e59e4&app_key=fa04c651c0c6cfe0d7ac0216c4742e2a&from=0&to=3&calories=591-722&health=alcohol-free";
-		return "redirect:/recipes";
+//		}
+		return "redirect:https://api.edamam.com/search?q="+ingredient+"&app_id=659e59e4&app_key=fa04c651c0c6cfe0d7ac0216c4742e2a&from=0&to=3&calories=591-722&health=alcohol-free";
+//		return "redirect:/recipes";
 	}
 	
 	@RequestMapping(value="/apisearch", method=RequestMethod.POST)
