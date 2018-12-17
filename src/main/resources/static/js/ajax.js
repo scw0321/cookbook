@@ -7,25 +7,28 @@
 //			success: function(res){
 //				console.log("success!");
 //				console.log(res);
+//				var resHits = res.hits;
 //				$.ajax({
 //					method:"POST",
-//					url: "/asearch",
-//					data: res,
+//					url: "/apisearch",
+//					data:JSON.stringify(res),
 //					success: function(page_res){
 //						console.log("2nd success!");
 //						console.log(page_res);
 //					}
-//				})
+//				});
 //			}
-//		})
-//		
-////		$.ajax({
-////			method:"GET",
-////			url: "/asearch",
-////			success: function(res){
-////				console.log("success");
-////				console.log(res);
-////			}
-////		})
-//	})
+//		});
+//	});
 //});
+////		
+//////		$.ajax({
+//////			method:"GET",
+//////			url: "/asearch",
+//////			success: function(res){
+//////				console.log("success");
+//////				console.log(res);
+//////			}
+//////		})
+////	})
+////});

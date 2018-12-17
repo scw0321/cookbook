@@ -62,6 +62,8 @@
 	<c:out value="${recipe.hits.recipe}"/>
 	</c:forEach>
 
+<div class="apiResponse">
+</div>
 
 </body>
 
